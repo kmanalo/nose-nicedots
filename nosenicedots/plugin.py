@@ -122,7 +122,10 @@ class NiceDotsResult(_TextTestResult):
             context = get_context(test)
             if context:
                 self.stream.writeln("")
-                self.stream.writeln(context)
+                context_descriptor = self.getDescription(test)
+                this_file  = context_descriptor.split(':')[0]
+                this_class = context_descriptor.split(":")[1].split(".")[0]
+                self.stream.writeln(this_file + ':' + this_class)
             self.stream.write('.')
             self.stream.flush()
 
